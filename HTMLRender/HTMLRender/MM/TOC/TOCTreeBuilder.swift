@@ -9,106 +9,107 @@ import Foundation
 
 final class TOCTreeBuilder {
 
-    func build(rows: [TocCSVRow]) -> [TOCNode] {
+    static func build(
+        from rows: [TocItemCSV]
+    ) -> [TOCNode] {
 
         var roots: [TOCNode] = []
 
-        var nodes: [String: TOCNode] = [:]
+        var level1Map: [String: TOCNode] = [:]
+        var level2Map: [String: TOCNode] = [:]
+        var level3Map: [String: TOCNode] = [:]
 
         for row in rows {
 
-            let l1 = normalize(row.level1)
-            let l2 = normalize(row.level2)
-            let l3 = normalize(row.level3)
-            let l4 = normalize(row.level4)
+            guard let l1 = row.level1 else {
+                continue
+            }
 
-            let node = TOCNode(
-                id: row.id,
-                title: row.title,
-                level1: l1,
-                level2: l2,
-                level3: l3,
-                level4: l4
-            )
+            //----------------------------------
+            // LEVEL 1
+            //----------------------------------
 
-            let currentKey = makeKey(
-                l1: l1,
-                l2: l2,
-                l3: l3,
-                l4: l4
-            )
+            if row.level2 == nil {
 
-            let parentKey = makeParentKey(
-                l1: l1,
-                l2: l2,
-                l3: l3,
-                l4: l4
-            )
-
-            nodes[currentKey] = node
-
-            if parentKey.isEmpty {
+                let node = TOCNode(
+                    id: row.id,
+                    title: "\(l1) - \(row.title)",
+                    type: .level1
+                )
 
                 roots.append(node)
 
-            } else {
-
-                nodes[parentKey]?.children?.append(node)
+                level1Map[l1] = node
+                continue
             }
+
+            guard let l2 = row.level2 else {
+                continue
+            }
+
+            let level2Key = "\(l1)-\(l2)"
+
+            //----------------------------------
+            // LEVEL 2
+            //----------------------------------
+
+            if row.level3 == nil {
+
+                let node = TOCNode(
+                    id: row.id,
+                    title: "\(l1)-\(l2) - \(row.title)",
+                    type: .level2
+                )
+
+                level1Map[l1]?.children.append(node)
+
+                level2Map[level2Key] = node
+
+                continue
+            }
+
+            guard let l3 = row.level3 else {
+                continue
+            }
+
+            let level3Key = "\(l1)-\(l2)-\(l3)"
+
+            //----------------------------------
+            // LEVEL 3
+            //----------------------------------
+
+            if row.level4 == nil {
+
+                let node = TOCNode(
+                    id: row.id,
+                    title: "\(l1)-\(l2)-\(l3) - \(row.title)",
+                    type: .level3
+                )
+
+                level2Map[level2Key]?.children.append(node)
+
+                level3Map[level3Key] = node
+
+                continue
+            }
+
+            guard let l4 = row.level4 else {
+                continue
+            }
+
+            //----------------------------------
+            // LEVEL 4
+            //----------------------------------
+
+            let node = TOCNode(
+                id: row.id,
+                title: "\(l1)-\(l2)-\(l3)-\(l4) - \(row.title)",
+                type: .level4
+            )
+
+            level3Map[level3Key]?.children.append(node)
         }
 
         return roots
-    }
-}
-
-private extension TOCTreeBuilder {
-
-    func normalize(_ value: String) -> String {
-
-        let text = value.trimmingCharacters(in: .whitespaces)
-
-        if text == "0" || text.isEmpty {
-            return ""
-        }
-
-        return text
-    }
-
-    func makeKey(
-        l1: String,
-        l2: String,
-        l3: String,
-        l4: String
-    ) -> String {
-
-        [l1,l2,l3,l4]
-            .filter { !$0.isEmpty }
-            .joined(separator: "-")
-    }
-
-    func makeParentKey(
-        l1: String,
-        l2: String,
-        l3: String,
-        l4: String
-    ) -> String {
-
-        if !l4.isEmpty {
-            return [l1,l2,l3]
-                .filter { !$0.isEmpty }
-                .joined(separator: "-")
-        }
-
-        if !l3.isEmpty {
-            return [l1,l2]
-                .filter { !$0.isEmpty }
-                .joined(separator: "-")
-        }
-
-        if !l2.isEmpty {
-            return l1
-        }
-
-        return ""
     }
 }
