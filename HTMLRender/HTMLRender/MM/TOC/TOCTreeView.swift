@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct TOCTreeView: View {
 
     let toc: [TOCNode]
@@ -20,10 +21,14 @@ struct TOCTreeView: View {
                 children: \.children
             ) { node in
 
-                Text(node.title)
+                Label(
+                    node.title,
+                    systemImage: node.children?.isEmpty == false
+                    ? "folder"
+                    : "doc.text"
+                )
             }
         }
-        .navigationTitle("Table of Contents")
     }
 }
 

@@ -6,40 +6,46 @@
 //
 
 import Foundation
+
 final class TOCTreeBuilder {
 
     func build(rows: [TocCSVRow]) -> [TOCNode] {
 
         var roots: [TOCNode] = []
 
-        var dictionary: [String: TOCNode] = [:]
+        var nodes: [String: TOCNode] = [:]
 
         for row in rows {
+
+            let l1 = normalize(row.level1)
+            let l2 = normalize(row.level2)
+            let l3 = normalize(row.level3)
+            let l4 = normalize(row.level4)
 
             let node = TOCNode(
                 id: row.id,
                 title: row.title,
-                level1: row.level1,
-                level2: row.level2,
-                level3: row.level3,
-                level4: row.level4
+                level1: l1,
+                level2: l2,
+                level3: l3,
+                level4: l4
             )
 
             let currentKey = makeKey(
-                l1: row.level1,
-                l2: row.level2,
-                l3: row.level3,
-                l4: row.level4
+                l1: l1,
+                l2: l2,
+                l3: l3,
+                l4: l4
             )
-
-            dictionary[currentKey] = node
 
             let parentKey = makeParentKey(
-                l1: row.level1,
-                l2: row.level2,
-                l3: row.level3,
-                l4: row.level4
+                l1: l1,
+                l2: l2,
+                l3: l3,
+                l4: l4
             )
+
+            nodes[currentKey] = node
 
             if parentKey.isEmpty {
 
@@ -47,23 +53,26 @@ final class TOCTreeBuilder {
 
             } else {
 
-                dictionary[parentKey]?.children.append(node)
+                nodes[parentKey]?.children?.append(node)
             }
         }
 
         return roots
     }
 }
-/**
- let parser = TocCSVParser()
 
- let rows = try parser.parse(fileURL: csvURL)
+private extension TOCTreeBuilder {
 
- let builder = TOCTreeBuilder()
+    func normalize(_ value: String) -> String {
 
- let toc = builder.build(rows: rows)
- */
-extension TOCTreeBuilder {
+        let text = value.trimmingCharacters(in: .whitespaces)
+
+        if text == "0" || text.isEmpty {
+            return ""
+        }
+
+        return text
+    }
 
     func makeKey(
         l1: String,
@@ -85,21 +94,18 @@ extension TOCTreeBuilder {
     ) -> String {
 
         if !l4.isEmpty {
-
             return [l1,l2,l3]
-                .filter{$0 != ""}
+                .filter { !$0.isEmpty }
                 .joined(separator: "-")
         }
 
         if !l3.isEmpty {
-
             return [l1,l2]
-                .filter{$0 != ""}
+                .filter { !$0.isEmpty }
                 .joined(separator: "-")
         }
 
         if !l2.isEmpty {
-
             return l1
         }
 

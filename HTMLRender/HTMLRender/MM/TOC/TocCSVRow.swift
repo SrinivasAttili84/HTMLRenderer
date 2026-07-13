@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct TocCSVRow {
 
     let id: String
