@@ -13,21 +13,38 @@ final class TOCTreeBuilder {
         from rows: [TocItemCSV]
     ) -> [TOCNode] {
 
+        let sortedRows = rows.sorted {
+
+            let lhs =
+                ($0.level1 ?? "")
+              + ($0.level2 ?? "")
+              + ($0.level3 ?? "")
+              + ($0.level4 ?? "")
+
+            let rhs =
+                ($1.level1 ?? "")
+              + ($1.level2 ?? "")
+              + ($1.level3 ?? "")
+              + ($1.level4 ?? "")
+
+            return lhs < rhs
+        }
+
         var roots: [TOCNode] = []
 
-        var level1Map: [String: TOCNode] = [:]
-        var level2Map: [String: TOCNode] = [:]
-        var level3Map: [String: TOCNode] = [:]
+        var level1Map = [String: TOCNode]()
+        var level2Map = [String: TOCNode]()
+        var level3Map = [String: TOCNode]()
 
-        for row in rows {
+        for row in sortedRows {
 
             guard let l1 = row.level1 else {
                 continue
             }
 
-            //----------------------------------
+            //--------------------------------
             // LEVEL 1
-            //----------------------------------
+            //--------------------------------
 
             if row.level2 == nil {
 
@@ -40,6 +57,7 @@ final class TOCTreeBuilder {
                 roots.append(node)
 
                 level1Map[l1] = node
+
                 continue
             }
 
@@ -49,9 +67,9 @@ final class TOCTreeBuilder {
 
             let level2Key = "\(l1)-\(l2)"
 
-            //----------------------------------
+            //--------------------------------
             // LEVEL 2
-            //----------------------------------
+            //--------------------------------
 
             if row.level3 == nil {
 
@@ -74,9 +92,9 @@ final class TOCTreeBuilder {
 
             let level3Key = "\(l1)-\(l2)-\(l3)"
 
-            //----------------------------------
+            //--------------------------------
             // LEVEL 3
-            //----------------------------------
+            //--------------------------------
 
             if row.level4 == nil {
 
@@ -97,9 +115,9 @@ final class TOCTreeBuilder {
                 continue
             }
 
-            //----------------------------------
+            //--------------------------------
             // LEVEL 4
-            //----------------------------------
+            //--------------------------------
 
             let node = TOCNode(
                 id: row.id,
@@ -109,6 +127,8 @@ final class TOCTreeBuilder {
 
             level3Map[level3Key]?.children.append(node)
         }
+
+        print("ROOT COUNT = \(roots.count)")
 
         return roots
     }
