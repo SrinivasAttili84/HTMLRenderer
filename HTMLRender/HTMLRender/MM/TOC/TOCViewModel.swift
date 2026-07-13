@@ -6,19 +6,40 @@
 //
 
 import Foundation
+import SwiftUI
 
+@MainActor
 final class TOCViewModel: ObservableObject {
-
+    
     @Published var rootNodes: [TOCNode] = []
-
-    init() {
-
-        let csvRows = CSVParser.parseTocItems(
-            fileName: "TocItem"
-        )
-
-        rootNodes = TOCTreeBuilder.build(
-            from: csvRows
-        )
+    
+    func load() {
+        
+        Task.detached {
+            
+            let start =
+            CFAbsoluteTimeGetCurrent()
+            
+            let rows =
+            CSVParser.parseTocItems(
+                fileName: "TocItem"
+            )
+            
+            print(
+                "CSV:",
+                CFAbsoluteTimeGetCurrent()
+                - start
+            )
+            
+            let tree =
+            TOCTreeBuilder.build(
+                from: rows
+            )
+            
+            await MainActor.run {
+                
+                self.rootNodes = tree
+            }
+        }
     }
 }

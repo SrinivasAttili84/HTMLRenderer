@@ -5,34 +5,53 @@
 //  Created by Attili Naga Srinivasu on 13/07/26.
 //
 
+
 import SwiftUI
 
 struct TOCView: View {
-
-    @StateObject private var viewModel = TOCViewModel()
-
+    
+    @StateObject
+    private var vm = TOCViewModel()
+    
     var body: some View {
-
+        
         NavigationStack {
-
+            
             List {
-
-                ForEach(viewModel.rootNodes) { node in
-
-                    TOCRowView(node: node)
+                
+                OutlineGroup(
+                    vm.rootNodes,
+                    children: \.children
+                ) { node in
+                    
+                    HStack {
+                        
+                        Text(node.ataCode)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .frame(
+                                width: 120,
+                                alignment: .leading
+                            )
+                        
+                        Text(node.title)
+                    }
                 }
             }
-            .navigationTitle("Table Of Contents")
+            .listStyle(.plain)
+            .navigationTitle("TOC")
+            .task {
+                
+                vm.load()
+            }
         }
     }
 }
 
-import SwiftUI
-
-struct ContentView4: View {
-
+struct ContentView: View {
+    
     var body: some View {
-
+        
         TOCView()
     }
 }
