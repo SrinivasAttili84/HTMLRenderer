@@ -1,0 +1,39 @@
+[
+  {
+    "id":"1",
+    "title":"32-42-27 Brake",
+    "children":[
+      {
+        "id":"1.1",
+        "title":"CONF 00",
+        "children":[
+          {
+            "id":"1.1.1",
+            "title":"Removal of Brake",
+            "page":"remove.html",
+            "children":[
+              {
+                "id":"1.1.1.1",
+                "title":"Figure Sheet 1",
+                "page":"sheet1.html",
+                "children":[]
+              },
+              {
+                "id":"1.1.1.2",
+                "title":"Figure Sheet 2",
+                "page":"sheet2.html",
+                "children":[]
+              }
+            ]
+          },
+          {
+            "id":"1.1.2",
+            "title":"Installation",
+            "page":"install.html",
+            "children":[]
+          }
+        ]
+      }
+    ]
+  }
+]
