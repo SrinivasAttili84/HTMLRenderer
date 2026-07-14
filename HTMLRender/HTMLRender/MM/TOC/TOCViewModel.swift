@@ -10,35 +10,54 @@ import SwiftUI
 
 @MainActor
 final class TOCViewModel: ObservableObject {
-    
+
     @Published var rootNodes: [TOCNode] = []
-    
+    @Published var isLoading: Bool = false
+    @Published var selectedNode: TOCNode?
+
+    private var hasLoaded = false
+
     func load() {
-        
-        Task.detached {
-            
-            let start =
-            CFAbsoluteTimeGetCurrent()
-            
-            let rows =
-            CSVParser.parseTocItems(
+
+        guard !hasLoaded else {
+            return
+        }
+
+        hasLoaded = true
+        isLoading = true
+
+        Task.detached(priority: .userInitiated) {
+
+            let tocRows = TocItemParser.parse(
                 fileName: "TocItem"
             )
-            
-            print(
-                "CSV:",
-                CFAbsoluteTimeGetCurrent()
-                - start
+
+            let tocTree = TOCTreeBuilder.build(
+                from: tocRows
             )
-            
-            let tree =
-            TOCTreeBuilder.build(
-                from: rows
+
+            let tocItemContainers = RelationCSVParser.parseTocItemContainer(
+                fileName: "TocItem_Container"
             )
-            
+
+            let containerSolutions = RelationCSVParser.parseContainerSolution(
+                fileName: "Container_Solution"
+            )
+
+            let solutions = SolutionParser.parse(
+                fileName: "Solution"
+            )
+
+            let finalTree = SolutionAttacher.attachSolutions(
+                to: tocTree,
+                tocItemContainers: tocItemContainers,
+                containerSolutions: containerSolutions,
+                solutions: solutions
+            )
+
             await MainActor.run {
-                
-                self.rootNodes = tree
+                self.rootNodes = finalTree
+                self.isLoading = false
             }
         }
     }

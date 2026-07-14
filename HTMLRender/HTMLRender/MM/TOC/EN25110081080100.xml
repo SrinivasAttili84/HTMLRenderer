@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<task>
+
+<title>
+Vertical Electrical Control of the Captain Seat Inoperative
+</title>
+
+<warning>
+Disconnect aircraft electrical power before maintenance.
+</warning>
+
+<para>
+Step 1 - Remove the side panel.
+</para>
+
+<para>
+Step 2 - Inspect the seat control module.
+</para>
+
+<figure>
+
+    <title>
+    Captain Seat Assembly
+    </title>
+
+    <sheet cfnbr="12345"/>
+
+</figure>
+
+</task>
