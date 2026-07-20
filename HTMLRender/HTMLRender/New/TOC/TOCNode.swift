@@ -1,8 +1,8 @@
 //
 //  TOCNode.swift
-//  HTMLRender
+//  Accordion
 //
-//  Created by Attili Naga Srinivasu on 13/07/26.
+//  Created by Attili Naga Srinivasu on 20/07/26.
 //
 
 import Foundation
@@ -21,10 +21,15 @@ struct TOCNode: Identifiable {
 
     let ataCode: String
     let title: String
+
     let type: TOCNodeType
 
-    // Solution only
+    // important for search expansion
+    var parentId: String?
+
+    // solution-only fields
     var solutionId: String?
+    var solutionLabel: String?
     var trCode: String?
     var xmlFile: String?
 
@@ -35,7 +40,9 @@ struct TOCNode: Identifiable {
         ataCode: String,
         title: String,
         type: TOCNodeType,
+        parentId: String? = nil,
         solutionId: String? = nil,
+        solutionLabel: String? = nil,
         trCode: String? = nil,
         xmlFile: String? = nil,
         children: [TOCNode]? = nil
@@ -44,10 +51,11 @@ struct TOCNode: Identifiable {
         self.ataCode = ataCode
         self.title = title
         self.type = type
+        self.parentId = parentId
         self.solutionId = solutionId
+        self.solutionLabel = solutionLabel
         self.trCode = trCode
         self.xmlFile = xmlFile
         self.children = children
     }
 }
-

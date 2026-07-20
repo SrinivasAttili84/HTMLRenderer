@@ -9,42 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @StateObject
-    private var viewModel = TOCViewModel()
+    @StateObject private var viewModel = TOCViewModel()
 
     var body: some View {
 
         VStack(spacing: 0) {
 
-            HeaderView()
+            TopToolbarView()
 
-            Toolbar()
+            HStack(alignment: .top) {
 
-            HStack(alignment: .top, spacing: 16) {
-
-                TOCPanelView(
+                ManualTOCPanelView(
                     viewModel: viewModel
                 )
-                .frame(width: 560)
+                .frame(width: 720)
 
-                // Right side placeholder
-                RoundedRectangle(
-                    cornerRadius: 10
-                )
-                .fill(.white)
-                .overlay {
-
-                    Text("Rendering Pane")
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                }
+                Spacer()
             }
-            .padding()
+            .padding(24)
         }
-        .background(
-            Color.airbusBackground
-        )
+        .background(Color.airbusBackground)
         .task {
+
             viewModel.load()
         }
     }

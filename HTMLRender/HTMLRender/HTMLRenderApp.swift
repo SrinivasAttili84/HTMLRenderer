@@ -11,7 +11,7 @@ import SwiftUI
 struct HTMLRenderApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView1()
+            ContentView()
         }
     }
 }

@@ -1,8 +1,8 @@
 //
 //  TocItemCSV.swift
-//  HTMLRender
+//  Accordion
 //
-//  Created by Attili Naga Srinivasu on 13/07/26.
+//  Created by Attili Naga Srinivasu on 20/07/26.
 //
 
 import Foundation
@@ -19,17 +19,19 @@ struct TocItemCSV {
     let title: String
 
     var ataCode: String {
-        let parts = [
+
+        [
             level1,
             level2,
             level3,
             level4
-        ].compactMap { $0 }
-
-        return parts.joined(separator: "-")
+        ]
+        .compactMap { $0 }
+        .joined(separator: "-")
     }
 
     var depth: Int {
+
         if level4 != nil {
             return 4
         }
@@ -50,7 +52,9 @@ struct TocItemCSV {
     }
 
     var parentAtaCode: String? {
+
         switch depth {
+
         case 2:
             return level1
 
@@ -72,25 +76,4 @@ struct TocItemCSV {
             return nil
         }
     }
-}
-
-
-struct TocItemContainerRelation {
-
-    let tocItemId: String
-    let containerId: String
-}
-
-struct ContainerSolutionRelation {
-
-    let containerId: String
-    let solutionId: String
-}
-
-struct Solution: Identifiable {
-
-    let id: String
-    let label: String
-    let trCode: String
-    let xmlFile: String
 }
