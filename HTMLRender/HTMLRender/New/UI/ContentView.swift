@@ -12,26 +12,36 @@ struct ContentView: View {
     @StateObject private var viewModel = TOCViewModel()
 
     var body: some View {
+        HStack {
 
-        VStack(spacing: 0) {
+//            ManualTOCPanelView(
+//                viewModel: viewModel
+//            )
+//            .frame(width: 720)
 
-            TopToolbarView()
-
-            HStack(alignment: .top) {
-
-                ManualTOCPanelView(
-                    viewModel: viewModel
-                )
-                .frame(width: 720)
-
-                Spacer()
-            }
-            .padding(24)
+            SVGViewerPane(
+                svgFileName: "sample"
+            )
         }
-        .background(Color.airbusBackground)
-        .task {
-
-            viewModel.load()
-        }
+//        VStack(spacing: 0) {
+//
+//            TopToolbarView()
+//
+//            HStack(alignment: .top) {
+//
+//                ManualTOCPanelView(
+//                    viewModel: viewModel
+//                )
+//                .frame(width: 720)
+//
+//                Spacer()
+//            }
+//            .padding(24)
+//        }
+//        .background(Color.airbusBackground)
+//        .task {
+//
+//            viewModel.load()
+//        }
     }
 }

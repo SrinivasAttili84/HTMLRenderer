@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1200"
+    height="800"
+    viewBox="0 0 1200 800">
+
+    <defs>
+
+        <filter id="shadow">
+            <feDropShadow
+                dx="2"
+                dy="2"
+                stdDeviation="2"
+                flood-color="#999999"/>
+        </filter>
+
+    </defs>
+
+    <rect
+        x="0"
+        y="0"
+        width="1200"
+        height="800"
+        fill="#F8F9FA"/>
+
+    <!-- Title -->
+
+    <text
+        x="600"
+        y="80"
+        text-anchor="middle"
+        font-size="34"
+        font-family="Arial"
+        font-weight="bold"
+        fill="#003087">
+
+        Brake Assembly Illustration
+
+    </text>
+
+    <!-- Main Brake -->
+
+    <circle
+        cx="600"
+        cy="400"
+        r="180"
+        fill="#D9E8FF"
+        stroke="#003087"
+        stroke-width="6"
+        filter="url(#shadow)"/>
+
+    <circle
+        cx="600"
+        cy="400"
+        r="90"
+        fill="white"
+        stroke="#003087"
+        stroke-width="4"/>
+
+    <!-- Callout 1 -->
+
+    <line
+        x1="420"
+        y1="320"
+        x2="220"
+        y2="220"
+        stroke="#003087"
+        stroke-width="3"/>
+
+    <circle
+        cx="220"
+        cy="220"
+        r="28"
+        fill="#0057B8"/>
+
+    <text
+        x="220"
+        y="228"
+        text-anchor="middle"
+        font-size="20"
+        fill="white"
+        font-weight="bold">
+
+        1
+
+    </text>
+
+    <text
+        x="120"
+        y="195"
+        font-size="24"
+        font-family="Arial"
+        fill="#000000">
+
+        Hydraulic Port
+
+    </text>
+
+    <!-- Callout 2 -->
+
+    <line
+        x1="760"
+        y1="320"
+        x2="980"
+        y2="220"
+        stroke="#003087"
+        stroke-width="3"/>
+
+    <circle
+        cx="980"
+        cy="220"
+        r="28"
+        fill="#0057B8"/>
+
+    <text
+        x="980"
+        y="228"
+        text-anchor="middle"
+        font-size="20"
+        fill="white"
+        font-weight="bold">
+
+        2
+
+    </text>
+
+    <text
+        x="1010"
+        y="195"
+        font-size="24"
+        font-family="Arial"
+        fill="#000000">
+
+        Sensor Unit
+
+    </text>
+
+    <!-- Callout 3 -->
+
+    <line
+        x1="460"
+        y1="560"
+        x2="220"
+        y2="650"
+        stroke="#003087"
+        stroke-width="3"/>
+
+    <circle
+        cx="220"
+        cy="650"
+        r="28"
+        fill="#0057B8"/>
+
+    <text
+        x="220"
+        y="658"
+        text-anchor="middle"
+        font-size="20"
+        fill="white"
+        font-weight="bold">
+
+        3
+
+    </text>
+
+    <text
+        x="70"
+        y="700"
+        font-size="24"
+        font-family="Arial"
+        fill="#000000">
+
+        Brake Housing
+
+    </text>
+
+    <!-- Callout 4 -->
+
+    <line
+        x1="760"
+        y1="560"
+        x2="980"
+        y2="650"
+        stroke="#003087"
+        stroke-width="3"/>
+
+    <circle
+        cx="980"
+        cy="650"
+        r="28"
+        fill="#0057B8"/>
+
+    <text
+        x="980"
+        y="658"
+        text-anchor="middle"
+        font-size="20"
+        fill="white"
+        font-weight="bold">
+
+        4
+
+    </text>
+
+    <text
+        x="1010"
+        y="700"
+        font-size="24"
+        font-family="Arial"
+        fill="#000000">
+
+        Retaining Ring
+
+    </text>
+
+</svg>
