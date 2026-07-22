@@ -13,6 +13,7 @@ struct TOCNodeRowView: View {
     let level: Int
     let isExpanded: Bool
     let isInSelectedPath: Bool
+    @ObservedObject var viewModel: TOCViewModel
 
     var body: some View {
 
@@ -45,9 +46,7 @@ struct TOCNodeRowView: View {
         .padding(.horizontal, 16)
         .frame(height: rowHeight)
         .background(
-            isInSelectedPath
-            ? Color.airbusSelected
-            : Color.white
+            viewModel.isHighlighted(node: node) ? Color.airbusSelected: Color.white //new
         )
         .overlay(
             Rectangle()
@@ -136,7 +135,14 @@ struct TOCNodeRowView: View {
 
         return Text(makeBoldPrefix(text))
             .font(.system(size: 22))
-            .foregroundColor(.airbusTextBlue)
+            .foregroundColor(
+                viewModel.isHighlighted(
+                    node: node
+                )
+                ? .airbusTextBlue
+                : .black
+            )
+//            .foregroundColor(.airbusTextBlue)
             .lineLimit(2)
     }
 

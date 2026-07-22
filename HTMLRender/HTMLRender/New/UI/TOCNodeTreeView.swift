@@ -23,7 +23,8 @@ struct TOCNodeTreeView: View {
                 node: node,
                 level: level,
                 isExpanded: isExpanded,
-                isInSelectedPath: isInSelectedPath
+                isInSelectedPath: isInSelectedPath,
+                viewModel: viewModel
             )
             .contentShape(Rectangle())
             .onTapGesture {

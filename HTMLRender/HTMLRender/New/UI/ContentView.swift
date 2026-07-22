@@ -14,14 +14,14 @@ struct ContentView: View {
     var body: some View {
         HStack {
 
-//            ManualTOCPanelView(
-//                viewModel: viewModel
-//            )
-//            .frame(width: 720)
-
-            SVGViewerPane(
-                svgFileName: "sample"
+            ManualTOCPanelView(
+                viewModel: viewModel
             )
+            .frame(width: 720)
+
+//            SVGViewerPane(
+//                svgFileName: "sample"
+//            )
         }
 //        VStack(spacing: 0) {
 //
@@ -38,10 +38,10 @@ struct ContentView: View {
 //            }
 //            .padding(24)
 //        }
-//        .background(Color.airbusBackground)
-//        .task {
-//
-//            viewModel.load()
-//        }
+        .background(Color.airbusBackground)
+        .task {
+
+            viewModel.load()
+        }
     }
 }

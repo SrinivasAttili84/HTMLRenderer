@@ -16,7 +16,9 @@ final class TOCViewModel: ObservableObject {
     @Published var expandedNodes: Set<String> = []
 
     @Published var selectedNodeId: String?
+    @Published var selectedNode: TOCNode?
 
+    
     @Published var searchText: String = ""
 
     @Published var searchResults: [TOCNode] = []
@@ -91,7 +93,7 @@ final class TOCViewModel: ObservableObject {
     ) {
 
         selectedNodeId = node.id
-
+selectedNode = node
         expandParents(
             nodeId: node.id
         )
@@ -189,5 +191,65 @@ final class TOCViewModel: ObservableObject {
 
             expandedNodes.insert(node.id)
         }
+    }
+    //new
+    func isHighlighted(
+        node: TOCNode
+    ) -> Bool {
+
+        guard let selectedNode else {
+            return false
+        }
+
+        // existing hierarchy highlighting
+
+        if isSelectedPath(nodeId: node.id) {
+            return true
+        }
+
+        // apply only for solutions
+
+        guard
+            node.type == .solution,
+            selectedNode.type == .solution
+        else {
+            return false
+        }
+
+        // same parent section
+
+        guard
+            node.parentId == selectedNode.parentId
+        else {
+            return false
+        }
+
+        guard
+            let siblings = nodeLookup[selectedNode.parentId ?? ""]?.children
+        else {
+            return false
+        }
+
+        guard
+            let selectedIndex =
+                siblings.firstIndex(
+                    where: {
+                        $0.id == selectedNode.id
+                    })
+        else {
+            return false
+        }
+
+        guard
+            let currentIndex =
+                siblings.firstIndex(
+                    where: {
+                        $0.id == node.id
+                    })
+        else {
+            return false
+        }
+
+        return currentIndex <= selectedIndex
     }
 }
