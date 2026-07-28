@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "id": "ATA32",
+      "title": "ATA 32",
+      "nodeType": "group",
+
+      "items": [
+        {
+          "id": "ATA32-40",
+          "title": "Landing Gear",
+          "nodeType": "group",
+
+          "items": [
+            {
+              "id": "ATA32-40-00",
+              "title": "Wheels & Brakes",
+              "nodeType": "group",
+
+              "items": [
+                {
+                  "id": "ATA32-40-00-001",
+                  "title": "Brake Maintenance",
+                  "nodeType": "group",
+
+                  "items": [
+                    {
+                      "id": "SOL001",
+                      "title": "Brake Removal",
+                      "nodeType": "solution",
+
+                      "viewId": "VIEW001",
+
+                      "figureIds": [
+                        "FIG100"
+                      ]
+                    },
+
+                    {
+                      "id": "SOL002",
+                      "title": "Brake Installation",
+                      "nodeType": "solution",
+
+                      "viewId": "VIEW002",
+
+                      "figureIds": [
+                        "FIG101",
+                        "FIG102"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

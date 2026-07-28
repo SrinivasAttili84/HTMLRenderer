@@ -15,3 +15,15 @@ struct HTMLRenderApp: App {
         }
     }
 }
+
+/**
+ | Key         | Required          | Purpose              |
+ | ----------- | ----------------- | -------------------- |
+ | `id`        | ✅                 | Unique identifier    |
+ | `title`     | ✅                 | UI display text      |
+ | `nodeType`  | ✅                 | Business meaning     |
+ | `items`     | ✅                 | Recursive hierarchy  |
+ | `viewId`    | ✅ (Solution only) | Content mapping      |
+ | `figureIds` | Optional          | Illustration linkage |
+
+ */
