@@ -1,12 +1,1 @@
-{
-  "doctype": "AMM",
-  "revisionId": "R25",
-  "itemId": "ITEM001",
-  "customization": "STD",
-  "domain": "ATA32",
-  "functionalKey": "BRAKE_REMOVAL",
 
-  "applicability": {
-      "programs": ["A330-200"]
-  }
-}
