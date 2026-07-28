@@ -15,15 +15,38 @@ struct HTMLRenderApp: App {
         }
     }
 }
+/**
+ Package/
+
+ ├── toc/
+ │   └── toc.json
+
+ ├── views/
+ │   ├── VIEW001.html
+ │   ├── VIEW002.html
+ │   ├── VIEW003.html
+ │   └── ...
+
+ ├── figures/
+ │   ├── figures.json
+ │   ├── FIG100.svg
+ │   ├── FIG101.svg
+ │   ├── FIG102.svg
+ │   └── ...
+
+ └── metadata/
+     └── manual.json
+ */
+
 
 /**
- | Key         | Required          | Purpose              |
- | ----------- | ----------------- | -------------------- |
- | `id`        | ✅                 | Unique identifier    |
- | `title`     | ✅                 | UI display text      |
- | `nodeType`  | ✅                 | Business meaning     |
- | `items`     | ✅                 | Recursive hierarchy  |
- | `viewId`    | ✅ (Solution only) | Content mapping      |
- | `figureIds` | Optional          | Illustration linkage |
+ | Key         | Required        | Purpose                                |
+ | ----------- | --------------- | -------------------------------------- |
+ | `id`        | ✅               | Stable unique identifier               |
+ | `title`     | ✅               | Display name shown in TOC              |
+ | `type`  | ✅    optional           | Business meaning (`solution`) |
+ | `items`     | ✅ for groups    | Recursive hierarchy                    |
+ | `viewId`    | ✅ for solutions | Maps solution to HTML content          |
+ | `figureIds` | Optional        | Maps solution to illustrations         |
 
  */
