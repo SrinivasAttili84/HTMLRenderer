@@ -11,7 +11,29 @@ import SwiftUI
 struct HTMLRenderApp: App {
     var body: some Scene {
         WindowGroup {
-//            ContentView()
+            ContentView1()
+        }
+    }
+}
+
+import SwiftUI
+
+struct ContentView: View {
+
+    var body: some View {
+
+        if let url = Bundle.main.url(
+            forResource: "allelm01",
+            withExtension: "cgm"
+        ) {
+
+            CGMViewerScreen(cgmURL: url)
+
+        } else {
+
+            Text("CGM file not found")
+                .foregroundColor(.red)
+                .padding()
         }
     }
 }
