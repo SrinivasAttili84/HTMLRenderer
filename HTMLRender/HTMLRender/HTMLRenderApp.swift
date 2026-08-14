@@ -8,19 +8,26 @@
 import SwiftUI
 
 @main
-struct HTMLRenderApp: App {
+struct AirNavXSampleApp: App {
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                ManualSearchContainerView(
+                    manualType: .tsm
+                )
+                .padding(20)
+            }
         }
     }
 }
 
-import SwiftUI
-
-struct ContentView: View {
-
-    var body: some View {
-        CGMFileListView()
-    }
-}
+//
+//@main
+//struct HTMLRenderApp: App {
+//    var body: some Scene {
+//        WindowGroup {
+//            ContentView()
+//        }
+//    }
+//}
