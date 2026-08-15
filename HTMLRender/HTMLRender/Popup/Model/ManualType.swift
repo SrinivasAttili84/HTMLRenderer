@@ -6,17 +6,3 @@
 //
 
 import Foundation
-
-enum ManualType: String, CaseIterable, Identifiable {
-    case amm = "AMM"
-    case tsm = "TSM"
-    case ipc = "IPC"
-    case srm = "SRM"
-    case others = "Others"
-
-    var id: String { rawValue }
-
-    var displayName: String {
-        rawValue
-    }
-}
