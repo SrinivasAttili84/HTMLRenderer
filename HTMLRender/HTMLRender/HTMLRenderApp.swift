@@ -13,10 +13,7 @@ struct AirNavXSampleApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ManualSearchContainerView(
-                    manualType: .tsm
-                )
-                .padding(20)
+                ContentView()
             }
         }
     }
