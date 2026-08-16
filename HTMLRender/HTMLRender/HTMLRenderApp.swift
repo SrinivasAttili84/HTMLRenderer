@@ -13,7 +13,9 @@ struct AirNavXSampleApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ContentView()
+                ViewerScreen()
+//                ContentView1()
+//                ContentView()
             }
         }
     }
